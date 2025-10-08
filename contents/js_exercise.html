@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta>
+    <meta charset="UTF-8">
     <title>JS - Exercise</title>
     <style>
         table {
@@ -33,17 +33,13 @@
     <button onclick="window.history.back();">Back</button>
     <h1>Exercise</h1>
 
-    <h3>Create an UI with functions as below
-    </h3>
+    <h3>Create a UI with functions as below:</h3>
     <img src="./../images/exercise_01.png">
     </p>
     <ul>
-        <li>'Add': to add new input first name and last name as new record in table
-        </li>
-        <li>'Reset input': to clear values in 2 input texts
-        </li>
-        <li>'Reset table': to clear data rows in table
-        </li>
+        <li>'Add': to add new input first name and last name as new record in table</li>
+        <li>'Reset input': to clear values in 2 input texts</li>
+        <li>'Reset table': to clear data rows in table</li>
     </ul>
 
     </p>
@@ -54,61 +50,67 @@
     <input id="txtLastname" type="text" placeholder="Enter last name">
 
     <input id="btnAdd" type="button" value="Add" onclick="add();">
-    <input id="btnClearInputs" type="button" value="Clear" onclick="clearInputs();">
+    <input id="btnClearInputs" type="button" value="Reset input" onclick="clearInputs();">
     <input id="btnClearTable" type="button" value="Reset table" onclick="clearTable();">
 
-    <table>
+    <table id="dataTable">
         <thead>
             <tr>
-                <td>
-                    First name
-                </td>
-                <td>
-                    last name
-                </td>
+                <th>First name</th>
+                <th>Last name</th>
             </tr>
         </thead>
-        <tbody>
-
+        <tbody id="tableBody">
             <tr>
-                <td>
-                    Orapin
-                </td>
-                <td>
-                    Nakoon
-                </td>
+                <td>Orapin</td>
+                <td>Nakoon</td>
             </tr>
 
             <tr>
-                <td>
-                    John
-                </td>
-                <td>
-                    Smith
-                </td>
+                <td>John</td>
+                <td>Smith</td>
             </tr>
 
             <tr>
-                <td>
-                    Jo
-                </td>
-                <td>
-                    Bola
-                </td>
+                <td>Jo</td>
+                <td>Bola</td>
             </tr>
 
         </tbody>
     </table>
 
     <script>
+        // Add
         function add() {
-            firstname = document.getElementById('txtFirstname').value;
-            lastname = document.getElementById('txtLastname').value;
+            const firstname = document.getElementById('txtFirstname').value.trim();
+            const lastname = document.getElementById('txtLastname').value.trim();
+
+            if (firstname === "" || lastname === "") {
+                alert("กรุณากรอก First name และ Last name ให้ครบก่อนเพิ่มข้อมูล");
+                return;
+            }
+
+            const tableBody = document.getElementById('tableBody');
+            const newRow = tableBody.insertRow();
+
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+
+            cell1.textContent = firstname;
+            cell2.textContent = lastname;
+
+            clearInputs();
         }
 
+        // Reset input
         function clearInputs() {
             document.getElementById('txtFirstname').value = '';
             document.getElementById('txtLastname').value = '';
+        }
+
+        // Reset table
+        function clearTable() {
+            document.getElementById('tableBody').innerHTML = "";
         }
     </script>
 

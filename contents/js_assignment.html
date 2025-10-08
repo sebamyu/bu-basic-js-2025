@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>JS - Assignment</title>
     <style>
     body {
@@ -19,6 +20,16 @@
       text-decoration: line-through;
       color: gray;
     }
+
+    input[type="text"] {
+            padding: 5px;
+    }
+
+    button {
+            padding: 5px 10px;
+            margin-left: 3px;
+    }
+
   </style>
 </head>
 
@@ -46,6 +57,46 @@
 
 
     <h3>Your solution for assignment</h3>
+
+    <input id="taskInput" type="text" placeholder="Enter new task">
+    <button onclick="addTask()">Add</button>
+    <button onclick="clearAll()">Clear all todos</button>
+
+    <ul id="todoList">
+    </ul>
+
+    <script>
+        function addTask() {
+            const input = document.getElementById("taskInput");
+            const taskText = input.value.trim();
+
+            if (taskText === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            const li = document.createElement("li");
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+
+            const label = document.createElement("span");
+            label.textContent = " " + taskText;
+
+            checkbox.onchange = function () {
+                label.classList.toggle("completed", checkbox.checked);
+            };
+
+            li.appendChild(checkbox);
+            li.appendChild(label);
+            document.getElementById("todoList").appendChild(li);
+
+            input.value = "";
+        }
+
+        function clearAll() {
+            document.getElementById("todoList").innerHTML = "";
+        }
+    </script>
 
 </body>
 
